@@ -1,3 +1,9 @@
+
+
+https://github.com/user-attachments/assets/25f75953-4577-4b27-bb09-13ef66dc31a9
+
+
+
 # WalletMotion 💳✨
 
 **WalletMotion** is a stunning, physics-driven, hyper-realistic Wallet UI built completely from scratch in **SwiftUI**. This project demonstrates advanced layout techniques, interactive gesture-driven physics, and beautiful premium UI components.
