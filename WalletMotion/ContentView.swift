@@ -70,6 +70,7 @@ let mockCards = [
 struct ContentView: View {
     @State private var cards = mockCards
     @State private var selectedCard: Card? = nil
+    @State private var isIslandExpanded = false
     @Namespace private var animation
     @State private var appear = false
     
@@ -101,6 +102,7 @@ struct ContentView: View {
                                         playHaptic(style: .light)
                                         withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.55, blendDuration: 0.5)) {
                                             selectedCard = card
+                                            isIslandExpanded = true
                                         }
                                     }
                             } else {
@@ -116,20 +118,20 @@ struct ContentView: View {
             .opacity(selectedCard == nil ? 1 : 0)
             
             if let selected = selectedCard {
-                ExpandedCardView(card: selected, animation: animation, selectedCard: $selectedCard)
+                ExpandedCardView(card: selected, animation: animation, selectedCard: $selectedCard, isIslandExpanded: $isIslandExpanded)
                     .zIndex(1)
             }
             
             // Re-introducing the extraordinary simulated Dynamic Island!
             VStack {
-                DynamicIslandView(cards: $cards, selectedCard: $selectedCard)
+                DynamicIslandView(cards: $cards, selectedCard: $selectedCard, isIslandExpanded: $isIslandExpanded)
                     .padding(.top, 11)
                 Spacer()
             }
             .ignoresSafeArea(edges: .top)
             .zIndex(3)
         }
-        .statusBarHidden(selectedCard != nil) // Hides the Time and Battery when island expands!
+        .statusBarHidden(isIslandExpanded) // Hides the Time and Battery only when island is expanded!
         .onAppear {
             appear = true
         }
@@ -254,6 +256,7 @@ struct ExpandedCardView: View {
     var card: Card
     var animation: Namespace.ID
     @Binding var selectedCard: Card?
+    @Binding var isIslandExpanded: Bool
     
     @State private var dragOffset: CGSize = .zero
     @State private var showList = false
@@ -265,6 +268,7 @@ struct ExpandedCardView: View {
                     playHaptic(style: .light)
                     withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.55, blendDuration: 0.5)) {
                         selectedCard = nil
+                        isIslandExpanded = false
                     }
                 }) {
                     Image(systemName: "xmark.circle.fill")
@@ -274,7 +278,8 @@ struct ExpandedCardView: View {
                 Spacer()
             }
             .padding()
-            .padding(.top, 40)
+            .padding(.top, isIslandExpanded ? 40 : 10) // Smoothly animate the space away!
+            .animation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.6), value: isIslandExpanded)
             .opacity(dragOffset == .zero ? 1 : 0)
             
             CardView(card: card)
@@ -296,6 +301,7 @@ struct ExpandedCardView: View {
                                 playHaptic(style: .light)
                                 withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.55, blendDuration: 0.5)) {
                                     selectedCard = nil
+                                    isIslandExpanded = false
                                 }
                             } else {
                                 withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.55, blendDuration: 0.5)) {
@@ -369,6 +375,7 @@ struct TransactionRow: View {
 struct DynamicIslandView: View {
     @Binding var cards: [Card]
     @Binding var selectedCard: Card?
+    @Binding var isIslandExpanded: Bool
     
     // Auth phases: 0=hidden, 1=FaceID prompt, 2=Processing, 3=Success, 4=Failed
     @State private var phase = 0 
@@ -378,7 +385,7 @@ struct DynamicIslandView: View {
     
     var body: some View {
         ZStack {
-            if let card = selectedCard {
+            if isIslandExpanded, let card = selectedCard {
                 // LEFT SIDE CONTENT - Anchored perfectly to the left edge
                 HStack {
                     HStack(spacing: 12) {
@@ -492,21 +499,24 @@ struct DynamicIslandView: View {
             }
         }
         // This width calculation ensures it always leaves the 125pt center dead-zone clear on any device!
-        .frame(width: selectedCard != nil ? UIScreen.main.bounds.width - 24 : 125, height: selectedCard != nil ? 85 : 37)
+        .frame(width: isIslandExpanded ? UIScreen.main.bounds.width - 24 : 125, height: isIslandExpanded ? 85 : 37)
         .background(
             Color.black
                 // Burst of green glow exactly when phase 3 hits, red for phase 4
-                .shadow(color: phase == 3 ? Color.green.opacity(0.6) : (phase == 2 ? Color.blue.opacity(0.4) : (phase == 4 ? Color.red.opacity(0.6) : .clear)), radius: phase >= 3 ? 40 : 20, x: 0, y: 15)
+                .shadow(color: phase == 3 && isIslandExpanded ? Color.green.opacity(0.6) : (phase == 2 && isIslandExpanded ? Color.blue.opacity(0.4) : (phase == 4 && isIslandExpanded ? Color.red.opacity(0.6) : .clear)), radius: phase >= 3 ? 40 : 20, x: 0, y: 15)
         )
         // A true capsule shape mimics the native island perfectly
         .clipShape(Capsule(style: .continuous))
-        .animation(.interactiveSpring(response: 0.6, dampingFraction: 0.65, blendDuration: 0.6), value: selectedCard?.id)
+        .animation(.interactiveSpring(response: 0.6, dampingFraction: 0.65, blendDuration: 0.6), value: isIslandExpanded)
         .animation(.interactiveSpring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.5), value: phase)
-        .onChange(of: selectedCard?.id) { newValue in
-            if newValue != nil {
+        .onChange(of: isIslandExpanded) { newValue in
+            if newValue {
                 triggerRealFaceID()
             } else {
-                phase = 0
+                // Smoothly fade out phase when it collapses
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    phase = 0
+                }
             }
         }
     }
@@ -555,6 +565,13 @@ struct DynamicIslandView: View {
                     }
                     playSuccessHaptic()
                     insertNewTransaction()
+                    
+                    // Auto-collapse island beautifully after success!
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.6)) {
+                            isIslandExpanded = false
+                        }
+                    }
                 }
             }
         } else {
@@ -563,6 +580,13 @@ struct DynamicIslandView: View {
                 phase = 4
             }
             playErrorHaptic()
+            
+            // Auto-collapse on failure as well
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.6)) {
+                    isIslandExpanded = false
+                }
+            }
         }
     }
     
