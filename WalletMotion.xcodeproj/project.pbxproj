@@ -6,11 +6,62 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BD1D19182FCD5DD200F12799 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1D19172FCD5DD100F12799 /* WidgetKit.framework */; };
+		BD1D191A2FCD5DD200F12799 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1D19192FCD5DD200F12799 /* SwiftUI.framework */; };
+		BD1D192B2FCD5DD400F12799 /* WalletWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BD1D19152FCD5DD100F12799 /* WalletWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BD1D19292FCD5DD400F12799 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BD7F5A0F2FCC109A00F595A6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD1D19142FCD5DD100F12799;
+			remoteInfo = WalletWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BD1D19302FCD5DD400F12799 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BD1D192B2FCD5DD400F12799 /* WalletWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		BD1D19152FCD5DD100F12799 /* WalletWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WalletWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD1D19172FCD5DD100F12799 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		BD1D19192FCD5DD200F12799 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		BD7F5A172FCC109A00F595A6 /* WalletMotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletMotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BD1D192C2FCD5DD400F12799 /* Exceptions for "WalletWidget" folder in "WalletWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BD1D19142FCD5DD100F12799 /* WalletWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		BD1D191B2FCD5DD200F12799 /* WalletWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BD1D192C2FCD5DD400F12799 /* Exceptions for "WalletWidget" folder in "WalletWidgetExtension" target */,
+			);
+			path = WalletWidget;
+			sourceTree = "<group>";
+		};
 		BD7F5A192FCC109A00F595A6 /* WalletMotion */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = WalletMotion;
@@ -19,6 +70,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BD1D19122FCD5DD100F12799 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD1D191A2FCD5DD200F12799 /* SwiftUI.framework in Frameworks */,
+				BD1D19182FCD5DD200F12799 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BD7F5A142FCC109A00F595A6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -29,10 +89,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD1D19162FCD5DD100F12799 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD1D19172FCD5DD100F12799 /* WidgetKit.framework */,
+				BD1D19192FCD5DD200F12799 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BD7F5A0E2FCC109A00F595A6 = {
 			isa = PBXGroup;
 			children = (
 				BD7F5A192FCC109A00F595A6 /* WalletMotion */,
+				BD1D191B2FCD5DD200F12799 /* WalletWidget */,
+				BD1D19162FCD5DD100F12799 /* Frameworks */,
 				BD7F5A182FCC109A00F595A6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				BD7F5A172FCC109A00F595A6 /* WalletMotion.app */,
+				BD1D19152FCD5DD100F12799 /* WalletWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +120,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BD1D19142FCD5DD100F12799 /* WalletWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD1D192D2FCD5DD400F12799 /* Build configuration list for PBXNativeTarget "WalletWidgetExtension" */;
+			buildPhases = (
+				BD1D19112FCD5DD100F12799 /* Sources */,
+				BD1D19122FCD5DD100F12799 /* Frameworks */,
+				BD1D19132FCD5DD100F12799 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BD1D191B2FCD5DD200F12799 /* WalletWidget */,
+			);
+			name = WalletWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = WalletWidgetExtension;
+			productReference = BD1D19152FCD5DD100F12799 /* WalletWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		BD7F5A162FCC109A00F595A6 /* WalletMotion */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BD7F5A222FCC109C00F595A6 /* Build configuration list for PBXNativeTarget "WalletMotion" */;
@@ -55,10 +149,12 @@
 				BD7F5A132FCC109A00F595A6 /* Sources */,
 				BD7F5A142FCC109A00F595A6 /* Frameworks */,
 				BD7F5A152FCC109A00F595A6 /* Resources */,
+				BD1D19302FCD5DD400F12799 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BD1D192A2FCD5DD400F12799 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BD7F5A192FCC109A00F595A6 /* WalletMotion */,
@@ -80,6 +176,9 @@
 				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
+					BD1D19142FCD5DD100F12799 = {
+						CreatedOnToolsVersion = 26.1;
+					};
 					BD7F5A162FCC109A00F595A6 = {
 						CreatedOnToolsVersion = 26.1;
 					};
@@ -100,11 +199,19 @@
 			projectRoot = "";
 			targets = (
 				BD7F5A162FCC109A00F595A6 /* WalletMotion */,
+				BD1D19142FCD5DD100F12799 /* WalletWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BD1D19132FCD5DD100F12799 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BD7F5A152FCC109A00F595A6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +222,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BD1D19112FCD5DD100F12799 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BD7F5A132FCC109A00F595A6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +238,77 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BD1D192A2FCD5DD400F12799 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BD1D19142FCD5DD100F12799 /* WalletWidgetExtension */;
+			targetProxy = BD1D19292FCD5DD400F12799 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		BD1D192E2FCD5DD400F12799 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2Z2SRXP4S5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WalletWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WalletWidget;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID to securely authenticate your payments.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.demo.sdk.WalletMotion.WalletWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BD1D192F2FCD5DD400F12799 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2Z2SRXP4S5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WalletWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WalletWidget;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID to securely authenticate your payments.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.demo.sdk.WalletMotion.WalletWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		BD7F5A202FCC109C00F595A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -258,6 +442,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = WalletMotion;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID to securely authenticate your payments.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -296,6 +481,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = WalletMotion;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID to securely authenticate your payments.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -325,6 +511,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BD1D192D2FCD5DD400F12799 /* Build configuration list for PBXNativeTarget "WalletWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD1D192E2FCD5DD400F12799 /* Debug */,
+				BD1D192F2FCD5DD400F12799 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BD7F5A122FCC109A00F595A6 /* Build configuration list for PBXProject "WalletMotion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
